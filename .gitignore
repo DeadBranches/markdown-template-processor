@@ -12,7 +12,7 @@
 
 # Include .py, .ipynb, .pdf, and .md files in any subdirectory.
 !**/*.py
-!**/*.md
+!**/examples/*.md
 !**/setup.nu
 
 # Include configuration file examples
