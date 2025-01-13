@@ -8,7 +8,8 @@
 
 # include a file in a subfolder
 !**/html/**/*.html
-
+!**/llm-development-logs/*.txt
+!**/llm-development-logs/*.py
 
 # Include .py, .ipynb, .pdf, and .md files in any subdirectory.
 !**/*.py
