@@ -18,9 +18,6 @@ class MarkdownRules:
         # Create a pattern to match the exact header
         header_pattern = re.escape(header_text)
 
-        # Create a pattern to match any header of same or higher level
-        next_header_pattern = f"^#{{{1,{header_level}}}}\s"
-
         # Find the start position of our target header
         match = re.search(header_pattern, content, re.MULTILINE)
         if not match:
@@ -28,19 +25,24 @@ class MarkdownRules:
 
         start_pos = match.start()
 
-        # Find the next header of same or higher level
-        next_match = re.search(
-            next_header_pattern, content[start_pos + len(header_text) :], re.MULTILINE
-        )
+        # Split the remaining content into lines
+        remaining_content = content[start_pos:].split("\n")
 
-        if next_match:
-            end_pos = start_pos + len(header_text) + next_match.start()
-            extracted_content = content[start_pos:end_pos]
-        else:
-            # If no next header found, take everything until the end
-            extracted_content = content[start_pos:]
+        # Collect lines until we hit a header of same or higher level
+        result_lines = []
+        for line in remaining_content:
+            # Check if line is a header
+            header_match = re.match(r"^(#+)\s", line)
+            if (
+                header_match
+                and len(header_match.group(1)) <= header_level
+                and line != header_text
+            ):
+                # Found a header of same or higher level (fewer or equal #s)
+                break
+            result_lines.append(line)
 
-        return extracted_content.strip()
+        return "\n".join(result_lines).strip()
 
 
 class MarkdownTemplateProcessor:

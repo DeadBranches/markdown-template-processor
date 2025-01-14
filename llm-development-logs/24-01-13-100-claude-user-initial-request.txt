@@ -1,0 +1,26 @@
+<Instructions>
+1. Write a python script that achieves the user's goal. The user's goal is defined below within the `<Goal>` xml tags `</Goal> `
+</Instructions>
+
+<Goal>
+I want to make a python script that:
+
+* Allows me to specify an input markdown file
+* Allows me to specify an template file
+* The template file is evaluated to produce the output file
+*  The output file is produced containing the content of the template file, which consists of plain text and also evaluated template expressions. Only the given elements from the input file as specified in the template file.
+
+Here's how it should work:
+- The template file defines what's included in the output file from the markdown input file.
+- The template file contains a plain text structure combined with "template" tags that are evaluated.
+  - The template tags define parts of the input file to include in the output file. For example, `{{ header['### Diagnostic Criteria'] }}` will apply the "header" rule with `### Diagnostic Criteria` as the input to the rule
+- When a placeholder is encountered, the rule logic is executed. One such rule logic is the `header` rule. `header` looks for a line where the input argument is an exact match. The logic for the header rule is that:
+1. everything from the start of the header in the placeholder is included in the output file UNTIL:
+  a. Another markdown header OF THE SAME LEVEL is encountered, or
+  b. Another markdown header OF A HIGHER LEVEL is encountered (e.g. `# moo` is higher than `## mew`
+The logic for all of this is included in a self-contained rule that is fed into something that takes a number of rules and applies them for the given file
+</Goal>
+
+<Question>
+Is this possible to do with Jinja?
+</Question>
