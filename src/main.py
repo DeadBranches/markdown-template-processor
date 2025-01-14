@@ -1,3 +1,34 @@
+"""
+Markdown Template Processor
+
+This script processes a Markdown document using a Jinja2 template to extract and format
+specific content sections. It is designed for scenarios where content needs to be dynamically 
+extracted and formatted based on predefined templates.
+
+Classes:
+    MarkdownRules: Contains methods for extracting and processing specific sections of Markdown text.
+    MarkdownTemplateProcessor: Handles the integration of Jinja2 templates with Markdown content.
+
+Functions:
+    main(): Command-line entry point for the script.
+
+Usage:
+    Run this script with the required arguments to process a Markdown document and a template file:
+    ```
+    python main.py -i <input_markdown> -t <template_file> -o <output_file>
+    ```
+
+Example:
+    python main.py -i examples/input-documents/DSM-V-TR - Autism Spectrum Disorder.md \
+                   -t examples/templates/template.md \
+                   -o examples/outputs/DSM-V-TR - Autism Spectrum Disorder.md
+
+Dependencies:
+    - argparse
+    - re
+    - jinja2
+"""
+
 import argparse
 import re
 from typing import Any, Dict, List, Optional
