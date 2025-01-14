@@ -10,6 +10,8 @@
 !**/html/**/*.html
 !**/llm-development-logs/*.txt
 !**/llm-development-logs/*.py
+!examples/**
+!examples/*
 
 # Include .py, .ipynb, .pdf, and .md files in any subdirectory.
 !**/*.py
